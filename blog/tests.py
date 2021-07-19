@@ -49,6 +49,21 @@ class Tests:
     def test_get_all_blogs(self):
         response = self.client.get("/blogs")
         assert response.status_code == 200
+        blog = Blog.objects.create(
+            title="title", slug="title", summary="summary", content="content"
+        )
+        blog.save()
+        response = self.client.get("/blogs")
+        assert response.status_code == 200
+        assert len(response.data) == 1
+        blog = Blog.objects.create(
+            title="title2", slug="title2", summary="summary", content="content"
+        )
+        blog.save()
+        response = self.client.get("/blogs")
+        assert response.status_code == 200
+        assert len(response.data) == 2
+
 
     def test_patch_blog(self):
         blog = Blog.objects.create(
