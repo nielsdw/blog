@@ -8,16 +8,9 @@ from django.template.defaultfilters import slugify
 from django.shortcuts import get_object_or_404
 
 
-@api_view(["GET"])
-def index(request):
-    serializer = BlogSerializer(data=request.data)
-    if serializer.is_valid():
-        return Response(request, status=201)
-    return Response(data={}, status=200)
-
-
-class blogs(APIView):
+class Blogs(APIView):
     permission_classes = (IsAuthenticated,)
+
     def get(self, request, slug=None):
         if slug is not None:
             queryset = get_object_or_404(Blog, slug=slug)
