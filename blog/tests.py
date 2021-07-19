@@ -64,7 +64,6 @@ class Tests:
         assert response.status_code == 200
         assert len(response.data) == 2
 
-
     def test_patch_blog(self):
         blog = Blog.objects.create(
             title="title", slug="title", summary="summary", content="content"
