@@ -5,5 +5,17 @@ from blog.models import Blog
 
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = "__all__"
         model = Blog
+        fields = "__all__"
+
+
+class BlogListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blog
+        fields = ["title", "slug", "summary"]
+
+
+class BlogPatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blog
+        fields = ["title", "summary", "content"]
